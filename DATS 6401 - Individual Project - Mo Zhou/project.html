@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+<head>
+	<title>Individual Project (home)</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css" />
+	<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		//load the google charts
+		google.charts.load('current',{'packages':['corechart']});
+		
+		//load the call back function that runs when page loads
+		google.charts.setOnLoadCallback(drawAllSheets);
+		
+		function drawAllSheets() {
+			drawSheetName('education',
+						  'SELECT A, B, C, D, E, F',
+						  questionOneEducationResponseHandler);
+			drawSheetName('healthcare',
+						  'SELECT A, B, C, D, E, F',
+						  questionOneHealthResponseHandler);
+			drawSheetName('military',
+						  'SELECT A, C, D, E, F, G, H',
+						  questionOneMilitaryResponseHandler);
+			drawSheetName('education',
+						  'SELECT A, K',
+						  fastEducationResponseHandler);
+			drawSheetName('healthcare',
+						  'SELECT A, I',
+						  fastHealthResponseHandler);
+			drawSheetName('education',
+						  'SELECT A, L',
+						  fixedEducationResponseHandler);
+			drawSheetName('healthcare',
+						  'SELECT A, J',
+						  fixedHealthResponseHandler);
+		} //drawAllSheets
+		
+		function drawSheetName(sheetName, query, responseHandler) {
+			var queryString = encodeURIComponent(query);
+			var query = new google.visualization.Query(
+			 'https://docs.google.com/spreadsheets/d/1YbsAjD6YtpwzIT_vIUu0iBR_Cro2PR63Z1hOHVs4KQs/gviz/tq?sheet=' +
+						sheetName + '&headers=1&tq=' + queryString);
+			query.send(responseHandler);
+		}//drawSheetName
+		
+		function questionOneEducationResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort({column:4, desc:true});
+			var options = {
+						height: 400,
+						vAxis: {title: 'Spending in Billions ($)'},
+						hAxis: {title: 'Country'},
+			};
+			
+			var chart = new google.visualization.ColumnChart(
+						document.getElementById('q_one_education_div'));
+						
+			chart.draw(data, options);
+		} //questionOneEducationResponseHandler
+		
+		function questionOneHealthResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort({column:5, desc:true});
+			var options = {
+						height: 400,
+						vAxis: {title: 'Spending in Billions ($)'},
+						hAxis: {title: 'Country'},
+			};
+			
+			var chart = new google.visualization.ColumnChart(
+						document.getElementById('q_one_health_div'));
+						
+			chart.draw(data, options);
+		} //questionOneHealthResponseHandler
+		
+		function questionOneMilitaryResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort({column:5, desc:true});
+			var options = {
+						height: 400,
+						vAxis: {title: 'Spending in Billions ($)'},
+						hAxis: {title: 'Country'},
+			};
+			
+			var chart = new google.visualization.ColumnChart(
+						document.getElementById('q_one_military_div'));
+						
+			chart.draw(data, options);
+		} //questionOneMilitaryResponseHandler
+		
+		function fastEducationResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort({column:1, desc: true});
+			
+			var chart = new google.visualization.GeoChart(document.getElementById(
+						'fast_edu_div'));
+						
+			chart.draw(data, {'height': 400});
+		}//fastEducationResponseHandler
+		
+		function fastHealthResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort({column:1, desc: true});
+			
+			var chart = new google.visualization.GeoChart(document.getElementById(
+						'fast_health_div'));
+						
+			chart.draw(data, {'height': 400});
+		}//fastHealthResponseHandler
+		
+		function fixedEducationResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort = ({column:1, desc: true});
+			
+			var options = {
+						height:400,
+						legeng: 'none',
+						bars: 'horizontal',
+						vAxis: {title: 'Spending in Billions ($)'},
+						hAxis: {title: 'Country'}
+			};
+			
+			/* using a view*/
+			var view = new google.visualization.DataView(data);
+			
+			view.setColumns([0,1,{
+					calc: function (dt, row) {
+			return Math.floor(dt.getFormattedValue(row,1))+ 'B';
+			        },
+					sourceColumn:1,
+					type: 'string',
+					role: 'annotation'
+			}]);
+			
+			var chart = new google.visualization.BarChart(
+					document.getElementById('fixed_edu_div'));
+					
+			chart.draw(view, options); //change data to view
+		} // fixedEducationResponseHandler
+		
+		function fixedHealthResponseHandler(response) {
+			var data = response.getDataTable();
+			data.sort = ({column:1, desc: true});
+			
+			var options = {
+						height:400,
+						legeng: 'none',
+						bars: 'horizontal',
+						vAxis: {title: 'Spending in Billions ($)'},
+						hAxis: {title: 'Country'}
+			};
+			
+			/* using a view*/
+			var view = new google.visualization.DataView(data);
+			
+			view.setColumns([0,1,{
+					calc: function (dt, row) {
+			return Math.floor(dt.getFormattedValue(row,1))+ 'B';
+			        },
+					sourceColumn:1,
+					type: 'string',
+					role: 'annotation'
+			}]);
+			
+			var chart = new google.visualization.BarChart(
+					document.getElementById('fixed_health_div'));
+					
+			chart.draw(view, options); //change data to view
+		} // fixedHealthResponseHandler
+	</script>
+</head>
+
+<body>
+	<div id="main">
+		<div id="header">
+			<div id="logo">
+				<div id="logo_text">
+					<h1>DATS 6401 Individual Project | Mo Zhou</h1>
+				</div><!--logo_text-->
+			</div><!--logo-->
+			<div id="menubar">
+				<ul id="menu">
+					<li class="selected"><a href="project.html">Rank</a></li>
+					<li><a href="education.html">Education</a></li>
+					<li><a href="healthcare.html">Healthcare</a></li>
+					<li><a href="military.html">Military</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div><!--menubar-->
+		</div><!--header-->
+		<div id="site_menu">
+			<div class="sidebar">
+				<br />
+				<br />
+				<h4>Useful link: </h4>
+					<ul>
+						<li><a href="https://en.wikipedia.org/wiki/G20">G20 Countries</a></li>
+					</ul>
+				<h4>Used Data Sets: </h4>
+					<ul>
+						<li><a href="https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS">Education Spending</a></li>
+						<li><a href="https://data.worldbank.org/indicator/SH.XPD.CHEX.PC.CD">Healthcare Spending</a></li>
+						<li><a href="https://data.worldbank.org/indicator/MS.MIL.XPND.CD">Military Spending</a></li>
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						
+					</ul>
+			</div><!--sidebar-->
+			<div id="content">
+				<h3>Introduction</h3>
+				<br />
+				<p>
+					In this project, I will discuss the relationships among expenditure of education, healthcare, 
+					military and gross domestic product(GDP) of G20 countries in last 7 years. Since healthcare, 
+					military and education are most important spending partials of a country, these three expenditures 
+					will tell me what a nation cares about and focuses on.
+				</p>
+				<p>
+					First, let’s take a look at these expenditures of G20 Countries,
+					and find out which country grows fast in healthcare and educational expenditure.
+				</p>
+				<button class="accordion">Education Spending of G20 Countries (2011-2016)</button>
+				<div class="panel">	
+				<h2>Education Spending of G20 Countries (2011-2015)</h2>
+				<div id="q_one_education_div"
+				style="width:90%; height:50%;"></div>
+				<p>
+					According to the above graph, United States has the highest spending in education from
+					2011 to 2015. Japan has the second highest spending and Germany, United Kingdom, France, 
+					and Brazil have similar amount of education spending. Also,Indonesia has the lowest education 
+					spending in among the countries in the graph. However, there are few countries do not publish
+					their education spending, like China, Saudi Arabia.
+				</p>
+				<br />
+				<h2>Fast Growing Nations based on Education Spending (2011-2016 fixed value)</h2>	
+				<div id="fixed_edu_div"
+					 style="width:90%; height:50%;"></div>
+				<p>
+					According to the above graph, United States also grows fastest in education. Even though France, 
+					Germany, Japan have a higher education spending in the first graph, they also reduced heavily in
+					education spending. Other nations in the graph are relatively same through 2011 to 2016, like Austrilia,
+					India, Turkey.
+				</p>
+				<br />
+				<h2>Fast Growing Nations based on Education Spending (2011-2016 Ratio) </h2>
+				<div id="fast_edu_div"
+					style="width: 90%; height:50%;"></div>
+				<p>
+					In the geo-map above, I use a ratio of annual growth of education spending to identify a fastest growing country. As you
+					can see, some nations have positve growth rate, like U.S., but some nations have negative ratio
+					which means that these nations reduce their education spending through these years. According to 
+					the ratio, South Korea has the highest annual growth rate in the map.
+				</p>
+				</div>
+				<button class="accordion">Healthcare Spending of G20 Countries (2011-2015)</button>
+				<div class="panel">
+				<h2>Healthcare Spending of G20 Countries</h2>
+				<div id="q_one_health_div"
+				style="width:100%; height:80%;"></div>
+				<p>
+					According to the above graph, United States has the highest spending in healthcare from 2011 
+					to 2015. Japan has a higher spending but its healthcare spending decreased from 2011 to 2015. 
+					However, the healthcare expenditure of China is the third highest and increased in those years.
+				</p>
+				<br />
+				<h2>Fast Growing Nations based on Healthcare Spending (2011-2015 fixed value)</h2>	
+				<div id="fixed_health_div"
+					 style="width:90%; height:50%;"></div>
+				<p>
+					According to the above graph, United States has the highest amount of increased healthcare spending,
+					and China has the second highest amount. However, Japan reduced the most in healthcare spending. From
+					the graph, the majority of nations have a decreased healthcare spending.
+				</p>
+				<br />
+				<h2>Fast Growing Nations based on Healthcare Spending (2011-2015 Ratio) </h2>
+				<div id="fast_health_div"
+					style="width: 90%; height:50%;"></div>
+				<p>
+					In the geo-map above, a ratio of growth rate for healthcare is used to identify the fastest growing country 
+					in healthcare. As you can see, China has the highest ratio which is 70.89%, and United States has the 
+					second highest ratio. Most nations showed in the map have a negative growth rate in healthcare which 
+					gives a same conclusion from last graph.
+				</p>
+				</div>
+				<button class="accordion">Military Spending of G20 Countries(2011-2017)</button>
+				<div class="panel">
+				<br />
+				<h2>Military Spending of G20 Countries</h2>
+				<div id="q_one_military_div"
+				style="width:100%; height:80%;"></div>
+				<p>
+					According to the graph above, United States has the highest spending in military. China has the
+					second highest spending. Russia, Saudi Arabia, France, India, United Kingdom, Japan have the similar 
+					amount of spending in military. Canada has the lowest military expenditure.
+				</p>
+				</div>
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+			acc[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var panel = this.nextElementSibling;
+				if (panel.style.maxHeight){
+				panel.style.maxHeight = null;
+				} else {
+					panel.style.maxHeight = panel.scrollHeight + "px";
+				} 
+			});
+		}
+	</script>
+			</div><!--content-->
+		</div><!--site_menu-->
+		<div id="content_footer">
+			<div id="footer">
+				&copy; <script>var d=new Date(); document.write(d.getFullYear());</script>
+				| <a>HTML5</a> | <a>CSS</a> | <a href="mailto:mzhou@gwu.edu">Mo Zhou</a>
+			</div><!-- footer -->
+		</div><!-- content_footer -->
+	</div><!--main-->
+</body>
+</html>
