@@ -1,0 +1,969 @@
+<!doctype html>
+<html>
+<head>
+	<title>Individual Project(healthcare)</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css" />
+	<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		//load the google charts
+		google.charts.load('current',{'packages':['corechart']});
+		
+		//load the call back function that runs when page loads
+		google.charts.setOnLoadCallback(drawAllSheets);
+		
+		function drawAllSheets() {
+			drawSheetName('question2healthcare',
+						  'SELECT A, X, C',
+						  qTwoHealthAustriliaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, Y, D',
+						  qTwoHealthBrazilResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, Z, E',
+						  qTwoHealthCanadaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AA, F',
+						  qTwoHealthChinaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AC, G',
+						  qTwoHealthGermanyResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AB, H',
+						  qTwoHealthFranceResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AK, I',
+						  qTwoHealthUnitedKingdomResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AD, K',
+						  qTwoHealthIndiaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AI, P',
+						  qTwoHealthRussiaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AE, L',
+						  qTwoHealthItalyResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AF, M',
+						  qTwoHealthJapanResponseHandler);		
+			drawSheetName('question2healthcare',
+						  'SELECT A, AG, N',
+						  qTwoHealthKoreaResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AH, O',
+						  qTwoHealthMexicoResponseHandler);
+			drawSheetName('question2healthcare',
+						  'SELECT A, AJ, R',
+						  qTwoHealthTurkeyResponseHandler);	
+			drawSheetName('question2healthcare',
+						  'SELECT A, AL, S',
+						  qTwoHealthUnitedStatesResponseHandler);
+						  
+			drawSheetName('question3healthcare',
+						  'SELECT A, C, B',
+						  qThreeHealthMilitarytotalResponseHandler);
+						  
+			drawSheetName('question4health',
+						  'SELECT A, X, C',
+						  qFourHealthAustriliaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, Y, D',
+						  qFourHealthBrazilResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, Z, E',
+						  qFourHealthCanadaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AA, F',
+						  qFourHealthChinaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AB, G',
+						  qFourHealthGermanyResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AC, H',
+						  qFourHealthFranceResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AD, I',
+						  qFourHealthUnitedKingdomResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AE, K',
+						  qFourHealthIndiaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AF, L',
+						  qFourHealthItalyResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AG, M',
+						  qFourHealthJapanResponseHandler);		
+			drawSheetName('question4health',
+						  'SELECT A, AH, N',
+						  qFourHealthKoreaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AI, O',
+						  qFourHealthMexicoResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AJ, P',
+						  qFourHealthRussiaResponseHandler);
+			drawSheetName('question4health',
+						  'SELECT A, AK, R',
+						  qFourHealthTurkeyResponseHandler);	
+			drawSheetName('question4health',
+						  'SELECT A, AL, S',
+						  qFourHealthUnitedStatesResponseHandler);
+		} //drawAllSheets
+		
+		function drawSheetName(sheetName, query, responseHandler) {
+			var queryString = encodeURIComponent(query);
+			var query = new google.visualization.Query(
+			 'https://docs.google.com/spreadsheets/d/1YbsAjD6YtpwzIT_vIUu0iBR_Cro2PR63Z1hOHVs4KQs/gviz/tq?sheet=' +
+						sheetName + '&headers=1&tq=' + queryString);
+			query.send(responseHandler);
+		}//drawSheetName
+		
+		
+		function qTwoHealthAustriliaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Austrilia',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_austrilia_div'));
+						
+			chart.draw(data, options);
+		}
+	
+		function qTwoHealthBrazilResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Brazil',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_brazil_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthCanadaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Canada',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_canada_div'));
+						
+			chart.draw(data, options);
+		}
+		function qTwoHealthChinaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in China',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_china_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthGermanyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Germany',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_germany_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthFranceResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in France',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_france_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthUnitedKingdomResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Health Spending vs. GDP in United Kingdom',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_uk_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthIndiaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in India',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_india_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthItalyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Italy',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_italy_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthJapanResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Japan',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_japan_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthKoreaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Korea Rep.',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_korea_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthMexicoResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Mexico',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_mexico_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthRussiaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Russia',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_russia_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthTurkeyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in Turkey',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_turkey_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qTwoHealthUnitedStatesResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Healthcare Spending vs. GDP in U.S.',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_health_us_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		/*function qTwoEduSouthAfricaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Education Spending vs. GDP in South Africa',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_two_edu_sa_div'));
+						
+			chart.draw(data, options);
+		} */
+
+		function qThreeHealthMilitarytotalResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Total Healthcare Spending vs. Total Military Spending',
+						vAxis: {title: 'Countries'},
+						hAxis: {title: 'Spending in Billions($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_three_health_me_div'));
+						
+			chart.draw(data, options);
+		} //qThreeHealthMilitarytotalResponseHandler
+		
+		function qFourHealthAustriliaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Austrilia',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_austrilia_div'));
+						
+			chart.draw(data, options);
+		}
+	
+		function qFourHealthBrazilResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Brazil',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_brazil_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthCanadaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Canada',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_canada_div'));
+						
+			chart.draw(data, options);
+		}
+		function qFourHealthChinaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in China',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_china_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthGermanyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Germany',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_germany_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthFranceResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in France',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_france_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthUnitedKingdomResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Health Spending vs. Per Cap GDP in U.K.',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_uk_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthIndiaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in India',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_india_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthItalyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Italy',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_italy_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthJapanResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Japan',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_japan_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthKoreaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Korea Rep.',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_korea_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthMexicoResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Mexico',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_mexico_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthRussiaResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Russia',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_russia_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthTurkeyResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in Turkey',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_turkey_div'));
+						
+			chart.draw(data, options);
+		}
+		
+		function qFourHealthUnitedStatesResponseHandler(response) {
+			var data = response.getDataTable();
+			//data.sort({column: 5, desc:true});
+			var options = {
+						height: 400,
+						legend: 'none',
+						bars: 'horizontal',
+						isStacked: true,
+						annotation: {alwaysOutside: true},
+						title: 'Per Capita Healthcare Spending vs. Per Capita GDP in U.S.',
+						vAxis: {title: 'Year'},
+						hAxis: {title: 'Spending in ($)'}
+			};
+			
+			var chart = new google.visualization.BarChart(
+						document.getElementById('q_four_health_us_div'));
+						
+			chart.draw(data, options);
+		}
+	</script>
+</head>
+
+<body>
+	<div id="main">
+		<div id="header">
+			<div id="logo">
+				<div id="logo_text">
+					<h1>DATS 6401 Individual Project | Mo Zhou</h1>
+				</div><!--logo_text-->
+			</div><!--logo-->
+			<div id="menubar">
+				<ul id="menu">
+					<li><a href="project.html">Rank</a></li>
+					<li><a href="education.html">Education</a></li>
+					<li class="selected"><a href="healthcare.html">Healthcare</a></li>
+					<li><a href="military.html">Military</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div><!--menubar-->
+		</div><!--header-->
+		<div id="site_menu">
+			<div class="sidebar">
+				<h4>Used Data Sets: </h4>
+					<ul>
+						<li><a href="https://data.worldbank.org/indicator/SH.XPD.CHEX.PC.CD">Healthcare Spending</a></li>
+						<li><a href="https://data.worldbank.org/indicator/MS.MIL.XPND.CD">Military Spending</a></li>
+						<li><a href="https://data.worldbank.org/indicator/ny.gdp.mktp.cd">GDP</a></li>
+						<li><a href="https://data.worldbank.org/indicator/SP.POP.TOTL">Population</a></li>
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+					</ul>
+			</div><!--sidebar-->
+			<div id="content">
+				<br />
+				<p>
+					Now, let's take a close look at healthcare expenditure of each nation in G20. I wil compare
+					healthcare spending with GDP and military spending to understand healthcare spending in these
+					countries.
+				</p>
+				<br />
+				<button class="accordion">Healthcare Spending vs. GDP(2011-2015)</button>
+				<div class="panel">
+				<br />
+				<p>
+					Healthcare spending compares to GDP is very small from 2011 to 2015. However, there are some 
+					nations have a relatively higher portion of healthcare in GDP, like United States, Canada, France,
+					Germany, Italy, United Kingdom. In Russia, China, Turkey, South Korea and India, healthcare 
+					expenditures are really small comparing to their GDP.	
+				</p>
+				<div id="q_two_health_austrilia_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_brazil_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_canada_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_china_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_germany_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_france_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_uk_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_india_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_italy_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_japan_div"
+				style="width:90%; height:50%;"></div>
+					
+				<div id="q_two_health_korea_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_mexico_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_russia_div"
+				style="width:90%; height:50%;"></div>
+					
+				<div id="q_two_health_turkey_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_two_health_us_div"
+				style="width:90%; height:50%;"></div>
+				</div>
+				
+				<button class="accordion">Per Capita Healthcare Spending vs. Per Capita GDP(2011-2015)</button>
+				<div class="panel">
+				<br />
+				<p>
+					Like the findings in 'Healthcare Spending vs. GDP(2011-2015)', per capita healthcare 
+					spending compares to per capita GDP is very small. However, there are some nations have 
+					a relatively higher portion of healthcare in GDP, like United States, Canada, France,
+					 Germany, Italy, United Kingdom. In Russia, China, Turkey, South Korea and India, per 
+					 capita healthcare expenditures are really small comparing to their GDP.
+				</p>
+				<br />
+				<div id="q_four_health_austrilia_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_brazil_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_canada_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_china_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_germany_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_france_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_uk_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_india_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_italy_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_japan_div"
+				style="width:90%; height:50%;"></div>
+					
+				<div id="q_four_health_korea_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_mexico_div"
+				style="width:90%; height:50%;"></div>
+					
+				<div id="q_four_health_russia_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_turkey_div"
+				style="width:90%; height:50%;"></div>
+				
+				<div id="q_four_health_us_div"
+				style="width:90%; height:50%;"></div>
+				</div>
+				
+				<button class="accordion">Total Healthcare Spending vs. Total Military Spending (from 2011 to 2015)</button>
+				<div class="panel">
+				<div id="q_three_health_me_div"
+				style="width:90%; height:50%;"></div>
+				<p>
+					According to the above graph, almost all nations have a higher total spending in healthcare than military.
+					United States has the highest total spending in both healthcare and military than other nations. However,
+					in Saudi Arabia, its total military spending is higher than its total healthcare spending.
+				</p>
+				<br />
+				</div>
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+			acc[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var panel = this.nextElementSibling;
+				if (panel.style.maxHeight){
+				panel.style.maxHeight = null;
+				} else {
+					panel.style.maxHeight = panel.scrollHeight + "px";
+				} 
+			});
+		}
+	</script>
+			</div><!--content-->
+		</div><!--site_menu-->
+		<div id="content_footer">
+			<div id="footer">
+				&copy; <script>var d=new Date(); document.write(d.getFullYear());</script>
+				| <a>HTML5</a> | <a>CSS</a> | <a href="mailto:mzhou@gwu.edu">Mo Zhou</a>
+			</div><!-- footer -->
+		</div><!-- content_footer -->
+	</div><!--main-->
+</body>
+</html>

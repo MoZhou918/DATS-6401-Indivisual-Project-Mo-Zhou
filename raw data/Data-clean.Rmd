@@ -1,0 +1,426 @@
+---
+title: "Data-clean"
+author: "Mo Zhou"
+date: "3/1/2019"
+output: html_document
+---
+```{r}
+##load useful packages
+library(plyr)
+library(dplyr)
+library(readr)
+```
+
+```{r}
+## GDP percapita 
+GDP_percapita <- read_csv("GDP-percapita.csv")
+
+#rename variables
+GDP_percapita <- rename(GDP_percapita,c("Country Name" = "Country_Name"))
+
+#select countries
+GDP_percapita <- GDP_percapita %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+GDP_percapita <- GDP_percapita %>% 
+  select("Country_Name",
+         "2011",
+         "2012",
+         "2013",
+         "2014",
+         "2015",
+         "2016",
+         "2017")
+```
+
+```{r}
+## GDP per year
+GDP_per_year <- read_csv("GDP_per_year.csv")
+
+#rename variables
+GDP_per_year <- rename(GDP_per_year,c("Country Name" = "Country_Name"))
+
+#select countries
+GDP_per_year <- GDP_per_year %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+GDP_per_year <- GDP_per_year %>% 
+  select("Country_Name",
+         "2011",
+         "2012",
+         "2013",
+         "2014",
+         "2015",
+         "2016",
+         "2017")
+
+```
+
+```{r}
+## Health Expenditure percapita
+health_percapita <- read_csv("health_percapita.csv")
+
+#rename variables
+health_percapita <- rename(health_percapita,c("Country Name" = "Country_Name"))
+
+#select countries
+health_percapita <- health_percapita %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+health_percapita <- health_percapita %>% 
+  select("Country_Name",
+         "2011",
+         "2012",
+         "2013",
+         "2014",
+         "2015",
+         "2016",
+         "2017")
+
+```
+
+```{r}
+## Health expenditure per year
+popullation <- read_csv("popullation.csv")
+
+#rename variables
+popullation <- rename(popullation,c("Country Name" = "Country_Name",
+                                    "2011"="pop_2011",
+                                    "2012"="pop_2012",
+                                    "2013"="pop_2013",
+                                    "2014"="pop_2014",
+                                    "2015"="pop_2015",
+                                    "2016"="pop_2016",
+                                    "2017"="pop_2017"))
+
+#select countries
+popullation <- popullation %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+popullation <- popullation %>% 
+  select("Country_Name",
+         "pop_2011",
+         "pop_2012",
+         "pop_2013",
+         "pop_2014",
+         "pop_2015",
+         "pop_2016",
+         "pop_2017")
+
+#calculate: health expenditure per year=health_percapita*popullation
+health_data <- merge(health_percapita, popullation)
+
+health_data <- rename(health_data,c("2011"="h_2011",
+                                    "2012"="h_2012",
+                                    "2013"="h_2013",
+                                    "2014"="h_2014",
+                                    "2015"="h_2015",
+                                    "2016"="h_2016",
+                                    "2017"="h_2017"))
+                                    
+health_data <- health_data %>% mutate(new_2011 = h_2011*pop_2011,
+                                      new_2012 = h_2012*pop_2012,
+                                      new_2013 = h_2013*pop_2013,
+                                      new_2014 = h_2014*pop_2014,
+                                      new_2015 = h_2015*pop_2015)
+
+health_data <- health_data %>% select(Country_Name,
+                                      new_2011,
+                                      new_2012,
+                                      new_2013,
+                                      new_2014,
+                                      new_2015)
+
+health_per_year <- rename(health_data,c(new_2011 = "2011",
+                                        new_2012 = "2012",
+                                        new_2013 = "2013",
+                                        new_2014 = "2014",
+                                        new_2015 = "2015"))
+```
+
+```{r}
+## Military expenditure per year
+military_per_year <- read_csv("military_expenditure_per_year.csv")
+
+#rename variables
+military_per_year <- rename(military_per_year,c("Country Name" = "Country_Name"))
+
+#select countries
+military_per_year <- military_per_year %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+military_per_year <- military_per_year %>% 
+  select("Country_Name",
+         "2011",
+         "2012",
+         "2013",
+         "2014",
+         "2015",
+         "2016",
+         "2017")
+```
+
+```{r}
+## Military expenditure percapita
+military_data <- merge(military_per_year, popullation)
+
+military_data <- rename(military_data,c("2011"="m_2011",
+                                        "2012"="m_2012",
+                                        "2013"="m_2013",
+                                        "2014"="m_2014",
+                                        "2015"="m_2015",
+                                        "2016"="m_2016",
+                                        "2017"="m_2017"))
+                                    
+military_data <- military_data %>% mutate(new_2011 = m_2011/pop_2011,
+                                          new_2012 = m_2012/pop_2012,
+                                          new_2013 = m_2013/pop_2013,
+                                          new_2014 = m_2014/pop_2014,
+                                          new_2015 = m_2015/pop_2015,
+                                          new_2016 = m_2016/pop_2016,
+                                          new_2017 = m_2017/pop_2017)
+
+military_data <- military_data %>% select(Country_Name,
+                                          new_2011,
+                                          new_2012,
+                                          new_2013,
+                                          new_2014,
+                                          new_2015,
+                                          new_2016,
+                                          new_2017)
+
+military_percapita <- rename(military_data,c(new_2011 = "2011",
+                                             new_2012 = "2012",
+                                             new_2013 = "2013",
+                                             new_2014 = "2014",
+                                             new_2015 = "2015",
+                                             new_2016 = "2016",
+                                             new_2017 = "2017"))
+```
+
+```{r}
+# Education expenditure per year
+educational_as_percent_GDP <- read_csv("educational_as_percent_GDP.csv")
+
+#rename variables
+educational_as_percent_GDP <- rename(educational_as_percent_GDP,c("Country Name" = "Country_Name"))
+
+#select countries
+educational_as_percent_GDP <- educational_as_percent_GDP %>% 
+  filter(Country_Name %in% 
+           c("Argentina", 
+             "Australia", 
+             "Brazil",
+             "Canada",
+             "China",
+             "France",
+             "Germany",
+             "India",
+             "Indonesia",
+             "Italy",
+             "Japan",
+             "Mexico",
+             "Russian Federation",
+             "Saudi Arabia",
+             "South Africa",
+             "Korea, Rep.",
+             "Turkey",
+             "United Kingdom",
+             "United States"))
+
+#select years
+educational_as_percent_GDP <- educational_as_percent_GDP %>% 
+  select("Country_Name",
+         "2011",
+         "2012",
+         "2013",
+         "2014",
+         "2015",
+         "2016",
+         "2017")
+
+gdp_data <- rename(GDP_per_year,c("Country Name" = "Country_Name",
+                                  "2011"="gdp_2011",
+                                  "2012"="gdp_2012",
+                                  "2013"="gdp_2013",
+                                  "2014"="gdp_2014",
+                                  "2015"="gdp_2015",
+                                  "2016"="gdp_2016",
+                                  "2017"="gdp_2017"))
+
+education_data <- merge(educational_as_percent_GDP, gdp_data)
+
+education_data <- rename(education_data,c("2011"="e_2011",
+                                          "2012"="e_2012",
+                                          "2013"="e_2013",
+                                          "2014"="e_2014",
+                                          "2015"="e_2015",
+                                          "2016"="e_2016",
+                                          "2017"="e_2017"))
+
+                                    
+education_data <- education_data %>% mutate(new_2011 = e_2011*gdp_2011/100,
+                                            new_2012 = e_2012*gdp_2012/100,
+                                            new_2013 = e_2013*gdp_2013/100,
+                                            new_2014 = e_2014*gdp_2014/100,
+                                            new_2015 = e_2015*gdp_2015/100,
+                                            new_2016 = e_2016*gdp_2016/100,
+                                            new_2017 = e_2017*gdp_2017/100)
+
+education_data <- education_data %>% select(Country_Name,
+                                            new_2011,
+                                            new_2012,
+                                            new_2013,
+                                            new_2014,
+                                            new_2015,
+                                            new_2016,
+                                            new_2017)
+
+education_per_year <- rename(education_data,c(new_2011 = "2011",
+                                              new_2012 = "2012",
+                                              new_2013 = "2013",
+                                              new_2014 = "2014",
+                                              new_2015 = "2015",
+                                              new_2016 = "2016",
+                                              new_2017 = "2017"))
+
+```
+
+```{r}
+## Education percapita
+edu_data <- merge(education_per_year, popullation)
+
+edu_data <- rename(edu_data,c("2011"="e_2011",
+                              "2012"="e_2012",
+                              "2013"="e_2013",
+                              "2014"="e_2014",
+                              "2015"="e_2015",
+                              "2016"="e_2016",
+                              "2017"="e_2017"))
+                                    
+edu_data <- edu_data %>% mutate(new_2011 = e_2011/pop_2011,
+                                new_2012 = e_2012/pop_2012,
+                                new_2013 = e_2013/pop_2013,
+                                new_2014 = e_2014/pop_2014,
+                                new_2015 = e_2015/pop_2015,
+                                new_2016 = e_2016/pop_2016,
+                                new_2017 = e_2017/pop_2017)
+
+edu_data <- edu_data %>% select(Country_Name,
+                                new_2011,
+                                new_2012,
+                                new_2013,
+                                new_2014,
+                                new_2015,
+                                new_2016,
+                                new_2017)
+
+education_percapita <- rename(edu_data,c(new_2011 = "2011",
+                                         new_2012 = "2012",
+                                         new_2013 = "2013",
+                                         new_2014 = "2014",
+                                         new_2015 = "2015",
+                                         new_2016 = "2016",
+                                         new_2017 = "2017"))
+```
+
